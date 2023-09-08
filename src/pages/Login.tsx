@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { LOGIN_BACKGROUND } from "../utils/constants";
+import SignInForm from "../components/SignInForm";
+import SignUpForm from "../components/SignUpForm";
 
 const Login: React.FunctionComponent = (): JSX.Element => {
   const [isSignInForm, setIsSignInForm] = useState<boolean>(true);
@@ -28,26 +30,7 @@ const Login: React.FunctionComponent = (): JSX.Element => {
               <p className="text-3xl font-semibold text-white tracking-tight mb-8">
                 {isSignInForm ? "Sign In" : "Sign Up"}
               </p>
-              {!isSignInForm && (
-                <input
-                  className="w-[330px] my-2 px-5 py-3 text-md bg-stone-800 text-gray-400 focus:outline-none rounded-md"
-                  type="text"
-                  placeholder="Full Name"
-                />
-              )}
-              <input
-                className="w-[330px] my-2 px-5 py-3 text-md bg-stone-800 text-gray-400 focus:outline-none rounded-md"
-                type="text"
-                placeholder="Email"
-              />
-              <input
-                className="w-[330px] my-2 px-5 py-3 text-md bg-stone-800 text-gray-400 focus:outline-none rounded-md"
-                type="password"
-                placeholder="Password"
-              />
-              <button className="w-[330px] mt-10 bg-red-700 hover:bg-red-800 text-gray-100 font-semibold text-lg py-3 rounded-md">
-                {isSignInForm ? "Sign In" : "Sign Up"}
-              </button>
+              {isSignInForm ? <SignInForm /> : <SignUpForm />}
               <p className="text-gray-400 mt-20 text-md">
                 {isSignInForm ? "New to MoviesGPT?" : "Already a user?"}
                 <button

@@ -1,24 +1,27 @@
-import React from "react"
-import { RouteObject, createBrowserRouter, RouterProvider } from "react-router-dom";
-import Login from "./components/Login";
-import Browse from "./components/Browse";
+import React from "react";
+import {
+  RouteObject,
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import Login from "./pages/Login";
+import Browse from "./pages/Browse";
 
 const App: React.FunctionComponent = (): JSX.Element => {
-
   const routes: RouteObject[] = [
     {
       path: "/",
-      element: <Login />
+      element: <Login />,
     },
     {
       path: "/browse",
-      element: <Browse />
-    }
-  ]
+      element: <Browse />,
+    },
+  ];
 
   const router = createBrowserRouter(routes);
 
-  return <RouterProvider router={router} />
-}
+  return <RouterProvider router={router} />;
+};
 
 export default App;
