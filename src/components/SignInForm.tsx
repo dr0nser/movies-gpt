@@ -1,10 +1,6 @@
-import SignInSchema from "../utils/SignInSchema";
+import SignInSchema from "../utils/signInSchema";
 import { useFormik } from "formik";
-
-interface SignInDetails {
-  email: string;
-  password: string;
-}
+import { SignInDetails } from "../utils/types";
 
 const SignInForm: React.FunctionComponent = (): JSX.Element => {
   const initialValues: SignInDetails = {

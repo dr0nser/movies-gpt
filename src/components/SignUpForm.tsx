@@ -1,11 +1,6 @@
-import SignUpSchema from "../utils/SignUpSchema";
+import SignUpSchema from "../utils/signUpSchema";
 import { useFormik } from "formik";
-
-interface SignUpDetails {
-  name: string;
-  email: string;
-  password: string;
-}
+import { SignUpDetails } from "../utils/types";
 
 const SignUpForm: React.FunctionComponent = (): JSX.Element => {
   const initialValues: SignUpDetails = {
