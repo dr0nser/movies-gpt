@@ -1,7 +1,15 @@
-const Browse = () => {
-  return (
-    <div>Browse</div>
-  )
-}
+import { useNavigate } from "react-router-dom";
+import { auth } from "../utils/firebase";
+import { useEffect } from "react";
 
-export default Browse
+const Browse = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!auth.currentUser) navigate("/");
+  }, []);
+
+  return <div>Browse</div>;
+};
+
+export default Browse;

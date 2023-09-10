@@ -4,14 +4,14 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import Login from "./pages/Login";
 import Browse from "./pages/Browse";
+import Auth from "./pages/Auth";
 
 const App: React.FunctionComponent = (): JSX.Element => {
   const routes: RouteObject[] = [
     {
       path: "/",
-      element: <Login />,
+      element: <Auth />,
     },
     {
       path: "/browse",
