@@ -1,5 +1,5 @@
-import { LOGIN_BACKGROUND } from "../utils/constants";
-import { signInWithPopup, onAuthStateChanged } from "firebase/auth";
+import { GOOGLE_LOGO_URL, LOGIN_BACKGROUND } from "../utils/constants";
+import { onAuthStateChanged, signInWithPopup } from "firebase/auth";
 import { auth, googleAuthProvider } from "../utils/firebase";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,13 @@ const Auth: React.FunctionComponent = (): JSX.Element => {
   const navigate = useNavigate();
 
   useEffect((): void => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        navigate("/browse");
+      } else {
+        navigate("/");
+      }
+    });
     try {
       if (auth.currentUser) {
         navigate("/browse");
@@ -16,12 +23,6 @@ const Auth: React.FunctionComponent = (): JSX.Element => {
       console.error(error);
     }
   }, []);
-
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      navigate("/browse");
-    }
-  });
 
   const handleGoogleAuth = async () => {
     try {
@@ -60,7 +61,7 @@ const Auth: React.FunctionComponent = (): JSX.Element => {
               >
                 <img
                   className="w-8 h-8 p-1 bg-white rounded-full"
-                  src="https://cdn-icons-png.flaticon.com/512/2702/2702602.png"
+                  src={GOOGLE_LOGO_URL}
                   alt="Google logo"
                 />
                 <p className="text-2xl text-white font-semibold">
