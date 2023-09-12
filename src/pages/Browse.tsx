@@ -1,15 +1,59 @@
 import { useNavigate } from "react-router-dom";
 import { auth } from "../utils/firebase";
 import { useEffect } from "react";
+import { Unsubscribe, onAuthStateChanged } from "firebase/auth";
+import Header from "../components/Header";
+import VideoBanner from "../components/VideoBanner";
+import { Movie } from "../utils/types";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { NOW_PLAYING_URL } from "../utils/constants";
 
 const Browse = () => {
   const navigate = useNavigate();
 
-  useEffect(() => {
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["nowPlaying"],
+    queryFn: async () => {
+      const response = await axios.get(NOW_PLAYING_URL, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${
+            import.meta.env.VITE_TMDB_READ_ACCESS_TOKEN
+          }`,
+        },
+      });
+      return response.data.results[getRandomIndexBetween(0, 19)] as Movie;
+    },
+    staleTime: 10 * 60 * 1000,
+  });
+
+  const getRandomIndexBetween = (min: number, max: number): number => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
+
+  useEffect((): Unsubscribe => {
     if (!auth.currentUser) navigate("/");
+    const authStateHandler: Unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        navigate("/browse");
+      } else {
+        navigate("/");
+      }
+    });
+    return () => authStateHandler();
   }, []);
 
-  return <div>Browse</div>;
+  if (isLoading) return <p>Loading</p>;
+
+  if (isError) return <p>Unexpected error occurred!</p>;
+
+  return (
+    <div className="bg-black">
+      <Header />
+      <VideoBanner id={data.id} title={data.title} overview={data.overview} />
+    </div>
+  );
 };
 
 export default Browse;

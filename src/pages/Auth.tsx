@@ -1,5 +1,9 @@
 import { GOOGLE_LOGO_URL, LOGIN_BACKGROUND } from "../utils/constants";
-import { onAuthStateChanged, signInWithPopup } from "firebase/auth";
+import {
+  Unsubscribe,
+  onAuthStateChanged,
+  signInWithPopup,
+} from "firebase/auth";
 import { auth, googleAuthProvider } from "../utils/firebase";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -7,8 +11,8 @@ import { useNavigate } from "react-router-dom";
 const Auth: React.FunctionComponent = (): JSX.Element => {
   const navigate = useNavigate();
 
-  useEffect((): void => {
-    onAuthStateChanged(auth, (user) => {
+  useEffect((): Unsubscribe => {
+    const authStateHandler: Unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         navigate("/browse");
       } else {
@@ -22,6 +26,7 @@ const Auth: React.FunctionComponent = (): JSX.Element => {
     } catch (error) {
       console.error(error);
     }
+    return () => authStateHandler();
   }, []);
 
   const handleGoogleAuth = async () => {

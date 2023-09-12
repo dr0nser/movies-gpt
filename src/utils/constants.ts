@@ -6,3 +6,10 @@ export const GOOGLE_LOGO_URL: string =
 
 export const LOGGED_IN_USER_ICON: string =
   "https://occ-0-2232-3662.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABY20DrC9-11ewwAs6nfEgb1vrORxRPP9IGmlW1WtKuaLIz8VxCx5NryzDK3_ez064IsBGdXjVUT59G5IRuFdqZlCJCneepU.png?r=229";
+
+export const NOW_PLAYING_URL =
+  "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1";
+
+export const BANNER_VIDEO_URL_PREFIX = "https://api.themoviedb.org/3/movie/";
+
+export const YOUTUBE_URL_PREFIX = "https://www.youtube.com/embed/";
