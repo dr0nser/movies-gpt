@@ -59,7 +59,7 @@ const Gallery: React.FunctionComponent<GalleryProps> = ({
         </div>
         {canScrollLeft && (
           <button
-            className="h-44 w-20 bg-gradient-to-r from-black to-transparent hover:text-white absolute top-0 left-0 text-6xl"
+            className="h-64 w-20 bg-gradient-to-r from-black to-transparent hover:text-white absolute top-0 left-0 text-6xl"
             onClick={() => scrollLeft()}
           >
             <HiChevronLeft />
@@ -67,7 +67,7 @@ const Gallery: React.FunctionComponent<GalleryProps> = ({
         )}
         {canScrollRight && (
           <button
-            className="h-44 w-16 bg-gradient-to-l from-black to-transparent hover:text-white transition-all duration-150 absolute top-0 right-0 text-6xl"
+            className="h-64 w-20 bg-gradient-to-l from-black to-transparent hover:text-white transition-all duration-150 absolute top-0 right-0 text-6xl"
             onClick={() => scrollRight()}
           >
             <HiChevronRight />

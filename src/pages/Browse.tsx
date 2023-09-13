@@ -53,7 +53,7 @@ const Browse = () => {
     <>
       <Header />
       <div className="relative h-screen w-full bg-black">
-        <VideoBanner id={data.id} title={data.title} overview={data.overview} />
+        <VideoBanner id={data.id} overview={data.overview} />
         <GalleryContainer />
       </div>
     </>
