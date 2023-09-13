@@ -39,21 +39,23 @@ const VideoBanner: React.FunctionComponent<BannerMovie> = ({
 
   return (
     <>
-      <div className="h-screen w-full relative">
+      <div className="bg-transparent h-screen w-full absolute">
         <iframe
           className="w-full h-screen"
-          src={`${YOUTUBE_URL_PREFIX}${data.key}?autoplay=1&mute=1&loop=1&playlist=${data.key}`}
+          src={`${YOUTUBE_URL_PREFIX}${data.key}?autoplay=1&mute=1&loop=1&playlist=${data.key}&controls=0&showinfo=0&vq=hd1080`}
           allowFullScreen
         ></iframe>
       </div>
-      <div className="w-full z-10 bg-gradient-to-t from-black to-transparent absolute h-[30vh] top-[70vh]"></div>
-      <div className="w-2/3 h-screen bg-gradient-to-r from-black to-transparent absolute top-0"></div>
-      <div className="absolute top-[35vh] px-20 z-20">
-        <p
-          className={`w-1/2 ${
-            title.length > 20 ? "text-8xl" : "text-9xl"
-          } font-extrabold tracking-tight text-gray-50`}
-        >
+      <div
+        id="hide-yt-controls"
+        className="w-full h-screen absolute top-0"
+      ></div>
+      <div
+        id="text-bg-gradient"
+        className="w-2/3 h-screen bg-gradient-to-r from-black to-transparent absolute top-0"
+      ></div>
+      <div className="absolute top-[25vh] px-20">
+        <p className="w-1/2 text-8xl font-extrabold tracking-tight text-gray-50">
           {title}
         </p>
         <p className="w-1/3 text-2xl tracking-tight text-gray-50 py-8">

@@ -8,6 +8,7 @@ import { Movie } from "../utils/types";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { NOW_PLAYING_URL } from "../utils/constants";
+import GalleryContainer from "../components/GalleryContainer";
 
 const Browse = () => {
   const navigate = useNavigate();
@@ -49,10 +50,13 @@ const Browse = () => {
   if (isError) return <p>Unexpected error occurred!</p>;
 
   return (
-    <div className="bg-black">
+    <>
       <Header />
-      <VideoBanner id={data.id} title={data.title} overview={data.overview} />
-    </div>
+      <div className="relative h-screen w-full bg-black">
+        <VideoBanner id={data.id} title={data.title} overview={data.overview} />
+        <GalleryContainer />
+      </div>
+    </>
   );
 };
 

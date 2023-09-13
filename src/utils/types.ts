@@ -1,14 +1,3 @@
-export interface SignInDetails {
-  email: string;
-  password: string;
-}
-
-export interface SignUpDetails {
-  name: string;
-  email: string;
-  password: string;
-}
-
 export interface Movie {
   adult: boolean;
   backdrop_path: string;
@@ -43,4 +32,41 @@ export interface BannerMovie {
   id: number;
   title: string;
   overview: string;
+}
+
+export interface Trending {
+  // Common
+  adult: boolean;
+  backdrop_path: string;
+  id: number;
+  original_language: string;
+  overview: string;
+  poster_path: string;
+  media_type: string;
+  genre_ids: number[];
+  popularity: number;
+  vote_average: number;
+  vote_count: number;
+
+  // TV Show
+  name?: string;
+  original_name?: string;
+  first_air_date?: string;
+  origin_country?: string[];
+
+  // Movie
+  title?: string;
+  original_title?: string;
+  release_date?: string;
+  video?: boolean;
+}
+
+export interface GalleryProps {
+  title: string;
+  cards: Trending[];
+  customCSS?: string;
+}
+
+export interface GalleryCardProp {
+  card: Trending;
 }

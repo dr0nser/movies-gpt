@@ -13,3 +13,5 @@ export const NOW_PLAYING_URL =
 export const BANNER_VIDEO_URL_PREFIX = "https://api.themoviedb.org/3/movie/";
 
 export const YOUTUBE_URL_PREFIX = "https://www.youtube.com/embed/";
+
+export const CARD_THUMBNAIL_IMAGE_PREFIX = "https://image.tmdb.org/t/p/w500";
