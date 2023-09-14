@@ -77,11 +77,12 @@ const VideoBanner: React.FunctionComponent<BannerMovie> = ({
         id="text-bg-gradient"
         className="w-2/3 h-screen bg-gradient-to-r from-black to-transparent absolute top-0"
       ></div>
-      <div className="absolute top-[25vh] px-20">
+      <div className="absolute top-[28vh] px-20">
         <img
+          className="max-h-64"
           src={`${CARD_THUMBNAIL_IMAGE_PREFIX}/${bannerText.data.file_path}`}
         />
-        <p className="w-1/3 text-2xl tracking-tight text-gray-300 py-8 antialiased">
+        <p className="w-1/3 text-2xl tracking-tight text-white py-8 antialiased">
           {overview}
         </p>
       </div>
