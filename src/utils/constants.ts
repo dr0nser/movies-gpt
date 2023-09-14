@@ -15,3 +15,6 @@ export const BANNER_VIDEO_URL_PREFIX = "https://api.themoviedb.org/3/movie/";
 export const YOUTUBE_URL_PREFIX = "https://www.youtube.com/embed/";
 
 export const CARD_THUMBNAIL_IMAGE_PREFIX = "https://image.tmdb.org/t/p/w500";
+
+export const PROFILE_ICON =
+  "https://occ-0-2232-3662.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABdpkabKqQAxyWzo6QW_ZnPz1IZLqlmNfK-t4L1VIeV1DY00JhLo_LMVFp936keDxj-V5UELAVJrU--iUUY2MaDxQSSO-0qw.png?r=e6e";

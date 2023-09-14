@@ -3,6 +3,7 @@ import { auth } from "../utils/firebase";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { PROFILE_ICON } from "../utils/constants";
 
 const Header: React.FunctionComponent = (): JSX.Element => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -40,8 +41,8 @@ const Header: React.FunctionComponent = (): JSX.Element => {
         <p className="text-4xl font-extrabold text-red-600">MoviesGPT</p>
         {/* Profile Details */}
         <div className="flex items-center space-x-2">
-          <div className="flex items-center space-x-1">
-            <img src="https://occ-0-2232-3662.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABdpkabKqQAxyWzo6QW_ZnPz1IZLqlmNfK-t4L1VIeV1DY00JhLo_LMVFp936keDxj-V5UELAVJrU--iUUY2MaDxQSSO-0qw.png?r=e6e" />
+          <div className="flex items-center space-x-1 mr-1">
+            <img src={PROFILE_ICON} />
             <span className="text-xl text-gray-50">
               {auth.currentUser
                 ? auth.currentUser.displayName?.split(" ")[0]
