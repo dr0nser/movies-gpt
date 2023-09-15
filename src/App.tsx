@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   RouteObject,
   createBrowserRouter,
@@ -6,8 +6,17 @@ import {
 } from "react-router-dom";
 import Browse from "./pages/Browse";
 import Auth from "./pages/Auth";
+import { SearchContext } from "./utils/context";
 
 const App: React.FunctionComponent = (): JSX.Element => {
+  const [searchEnabled, setSearchEnabled] = useState<boolean>(false);
+
+  const toggleSearchEnabled = () => {
+    setTimeout(() => {
+      setSearchEnabled(!searchEnabled);
+    }, 500);
+  };
+
   const routes: RouteObject[] = [
     {
       path: "/",
@@ -15,7 +24,11 @@ const App: React.FunctionComponent = (): JSX.Element => {
     },
     {
       path: "/browse",
-      element: <Browse />,
+      element: (
+        <SearchContext.Provider value={{ searchEnabled, toggleSearchEnabled }}>
+          <Browse />
+        </SearchContext.Provider>
+      ),
     },
   ];
 

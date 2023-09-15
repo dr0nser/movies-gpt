@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { auth } from "../utils/firebase";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Unsubscribe, onAuthStateChanged } from "firebase/auth";
 import Header from "../components/Header";
 import VideoBanner from "../components/VideoBanner";
@@ -9,9 +9,12 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { NOW_PLAYING_URL } from "../utils/constants";
 import GalleryContainer from "../components/GalleryContainer";
+import Search from "../components/Search";
+import { SearchContext } from "../utils/context";
 
 const Browse = () => {
   const navigate = useNavigate();
+  const { searchEnabled } = useContext(SearchContext);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["nowPlaying"],
@@ -53,7 +56,11 @@ const Browse = () => {
     <>
       <Header />
       <div className="relative h-screen w-full bg-black">
-        <VideoBanner id={data.id} overview={data.overview} />
+        {!searchEnabled ? (
+          <Search />
+        ) : (
+          <VideoBanner id={data.id} overview={data.overview} />
+        )}
         <GalleryContainer />
       </div>
     </>
