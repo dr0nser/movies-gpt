@@ -56,12 +56,14 @@ const Browse = () => {
     <>
       <Header />
       <div className="relative h-screen w-full bg-black">
-        {!searchEnabled ? (
+        {searchEnabled ? (
           <Search />
         ) : (
-          <VideoBanner id={data.id} overview={data.overview} />
+          <>
+            <VideoBanner id={data.id} overview={data.overview} />
+            <GalleryContainer />
+          </>
         )}
-        <GalleryContainer />
       </div>
     </>
   );

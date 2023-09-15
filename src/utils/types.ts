@@ -51,7 +51,7 @@ export interface Trending {
   original_language: string;
   overview: string;
   poster_path: string;
-  media_type: string;
+  media_type?: string;
   genre_ids: number[];
   popularity: number;
   vote_average: number;

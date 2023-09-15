@@ -30,7 +30,7 @@ const Header: React.FunctionComponent = (): JSX.Element => {
                 : ""}
             </span>
           </div>
-          {searchEnabled ? (
+          {!searchEnabled ? (
             <button
               onClick={() => toggleSearchEnabled()}
               className="text-gray-200 hover:bg-red-600 hover:text-gray-50 px-4 py-2 font-medium rounded-md flex items-center space-x-1 transition-all duration-150"
