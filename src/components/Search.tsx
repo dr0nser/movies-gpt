@@ -3,29 +3,23 @@ import { LOGIN_BACKGROUND } from "../utils/constants";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { HiXMark } from "react-icons/hi2";
 import { SearchContext } from "../utils/context";
-import openai from "../utils/openai";
-import SearchResults from "./SearchResults";
+import axios from "axios";
+import { auth } from "../utils/firebase";
+import { Movie } from "../utils/types";
+import SearchResult from "./SearchResult";
 
 const Search = () => {
   const { toggleSearchEnabled } = useContext(SearchContext);
   const [searchPrompt, setSearchPrompt] = useState("");
-  const [searchResult, setSearchResult] = useState("");
+  const [searchResult, setSearchResult] = useState<Movie[] | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (searchPrompt.length === 0) return;
-
-    const gptPrompt =
-      "Act as a movie recommendation system and suggest movies for the query: " +
-      searchPrompt +
-      ". Give 5 movie/tv show names at maximum. Provide the result as a comma separated string of movie names like in this example given ahead. Example: Gadar 2, Oppenheimer, Sholay, Barbie, Jawan. ";
-
-    const completion = await openai.chat.completions.create({
-      messages: [{ role: "assistant", content: gptPrompt }],
-      model: "gpt-3.5-turbo",
-    });
-    const moviesList = completion.choices[0].message.content;
-    setSearchResult(moviesList ? moviesList : "");
+    const response = await axios.get(
+      `http://localhost:8080/api/chat?userId=${auth.currentUser?.uid}&query=${searchPrompt}`
+    );
+    setSearchResult(response.data);
   };
 
   return (
@@ -61,7 +55,9 @@ const Search = () => {
           </div>
         </div>
       </div>
-      {searchResult.length > 0 ? <SearchResults result={searchResult} /> : null}
+      {searchResult && searchResult.length > 0 ? (
+        <SearchResult movies={searchResult} />
+      ) : null}
     </div>
   );
 };

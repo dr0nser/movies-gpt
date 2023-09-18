@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { GalleryProps, Trending } from "../utils/types";
+import { GalleryProps, Movie } from "../utils/types";
 import Card from "./Card";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 
@@ -53,8 +53,8 @@ const Gallery: React.FunctionComponent<GalleryProps> = ({
       </p>
       <div className="pb-6 relative">
         <div className="flex space-x-8 overflow-hidden" ref={galleryRef}>
-          {cards.map((card: Trending) => (
-            <Card key={card.id} card={card} />
+          {cards.map((card: Movie) => (
+            <Card key={card.id} {...card} />
           ))}
         </div>
         {canScrollLeft && (
