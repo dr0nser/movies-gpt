@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import { Movie } from "../utils/types";
 import axios from "axios";
 import { useEffect } from "react";
-import { Unsubscribe, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 

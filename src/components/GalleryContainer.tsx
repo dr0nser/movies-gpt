@@ -5,7 +5,6 @@ import { GalleryType } from "../utils/types";
 import Gallery from "./Gallery";
 import Footer from "./Footer";
 import { useEffect } from "react";
-import { Unsubscribe, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 
