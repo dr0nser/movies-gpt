@@ -1,12 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
 import { Movie } from "../utils/types";
 import axios from "axios";
+import { useEffect } from "react";
+import { Unsubscribe, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
 
-const VideoBanner: React.FunctionComponent = (): JSX.Element => {
+const VideoBanner: React.FunctionComponent = (): JSX.Element | null => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!auth.currentUser) navigate("/");
+  }, []);
+
   const { data, isLoading, isError } = useQuery({
     queryKey: ["banner"],
     queryFn: async () => {
+      if (!auth.currentUser) return null;
       const queryURL = `http://localhost:8080/api/banner?userId=${auth.currentUser?.uid}`;
       const response = await axios.get(queryURL);
       return response.data as Movie;
@@ -17,7 +27,7 @@ const VideoBanner: React.FunctionComponent = (): JSX.Element => {
 
   if (isError) return <></>;
 
-  return (
+  return data ? (
     <>
       <div className="bg-transparent h-screen w-full absolute">
         <iframe
@@ -41,7 +51,7 @@ const VideoBanner: React.FunctionComponent = (): JSX.Element => {
         </p>
       </div>
     </>
-  );
+  ) : null;
 };
 
 export default VideoBanner;
