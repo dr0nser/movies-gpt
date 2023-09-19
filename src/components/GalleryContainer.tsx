@@ -1,13 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import React, { useContext } from "react";
 import { GalleryType } from "../utils/types";
 import Gallery from "./Gallery";
 import Footer from "./Footer";
 import { useEffect } from "react";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
-import { ModalContext } from "../utils/context";
 
 const GalleryContainer: React.FunctionComponent = (): JSX.Element => {
   const navigate = useNavigate();

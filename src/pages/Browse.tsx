@@ -2,15 +2,12 @@ import { useContext, useEffect } from "react";
 import Header from "../components/Header";
 import VideoBanner from "../components/VideoBanner";
 import GalleryContainer from "../components/GalleryContainer";
-import Search from "../components/Search";
-import { SearchContext } from "../utils/context";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import InfoModal from "../components/InfoModal";
 import { ModalContext } from "../utils/context";
 
 const Browse = () => {
-  const { searchEnabled } = useContext(SearchContext);
   const navigate = useNavigate();
   const { viewModal } = useContext(ModalContext);
 
@@ -26,14 +23,8 @@ const Browse = () => {
     >
       <Header />
       <div className="relative flex-grow w-full bg-black">
-        {searchEnabled ? (
-          <Search />
-        ) : (
-          <>
-            <VideoBanner />
-            <GalleryContainer />
-          </>
-        )}
+        <VideoBanner />
+        <GalleryContainer />
       </div>
       {viewModal && <InfoModal />}
     </div>

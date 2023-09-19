@@ -1,10 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { Movie } from "../utils/types";
 import axios from "axios";
-import { useEffect, useContext } from "react";
+import { useEffect } from "react";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
-import { ModalContext } from "../utils/context";
 
 const VideoBanner: React.FunctionComponent = (): JSX.Element | null => {
   const navigate = useNavigate();
