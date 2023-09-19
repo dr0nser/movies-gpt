@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import {
   RouteObject,
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import Browse from "./pages/Browse";
 import Auth from "./pages/Auth";
 import { ModalContext, SearchContext } from "./utils/context";
 import { Movie } from "./utils/types";
+
+const Browse = React.lazy(() => import("./pages/Browse"));
 
 const App: React.FunctionComponent = (): JSX.Element => {
   const [searchEnabled, setSearchEnabled] = useState<boolean>(false);
@@ -34,18 +35,22 @@ const App: React.FunctionComponent = (): JSX.Element => {
     {
       path: "/browse",
       element: (
-        <SearchContext.Provider value={{ searchEnabled, toggleSearchEnabled }}>
-          <ModalContext.Provider
-            value={{
-              movie: modalMovie,
-              viewModal,
-              toggleViewModal,
-              setModalMovie,
-            }}
+        <Suspense fallback={<>...</>}>
+          <SearchContext.Provider
+            value={{ searchEnabled, toggleSearchEnabled }}
           >
-            <Browse />
-          </ModalContext.Provider>
-        </SearchContext.Provider>
+            <ModalContext.Provider
+              value={{
+                movie: modalMovie,
+                viewModal,
+                toggleViewModal,
+                setModalMovie,
+              }}
+            >
+              <Browse />
+            </ModalContext.Provider>
+          </SearchContext.Provider>
+        </Suspense>
       ),
     },
   ];
