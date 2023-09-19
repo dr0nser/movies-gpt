@@ -18,7 +18,7 @@ const Header: React.FunctionComponent = (): JSX.Element => {
   };
 
   return (
-    <header className="z-10 h-16 w-full sticky top-0 left-0 bg-black">
+    <header className="z-30 h-16 w-full sticky top-0 left-0 bg-black">
       <div className="px-12 h-full mx-auto flex justify-between items-center">
         <p className="text-4xl font-extrabold text-red-600">MoviesGPT</p>
         <div className="flex items-center space-x-2">

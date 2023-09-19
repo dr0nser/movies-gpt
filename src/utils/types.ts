@@ -21,3 +21,16 @@ export interface GalleryType {
 export interface SearchResultProp {
   movies: Movie[];
 }
+
+export interface GalleryProps {
+  title: string;
+  cards: Movie[];
+  customCSS?: string;
+}
+
+export interface ModalContextType {
+  movie: Movie | null;
+  viewModal: boolean;
+  toggleViewModal: () => void;
+  setModalMovie: (movie: Movie | null) => void;
+}

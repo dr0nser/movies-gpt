@@ -6,19 +6,26 @@ import Search from "../components/Search";
 import { SearchContext } from "../utils/context";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import InfoModal from "../components/InfoModal";
+import { ModalContext } from "../utils/context";
 
 const Browse = () => {
   const { searchEnabled } = useContext(SearchContext);
   const navigate = useNavigate();
+  const { viewModal } = useContext(ModalContext);
 
   useEffect(() => {
     if (!auth.currentUser) navigate("/");
   }, []);
 
   return (
-    <>
+    <div
+      className={`relative h-screen flex flex-col w-full ${
+        viewModal ? "overflow-hidden" : ""
+      }`}
+    >
       <Header />
-      <div className="relative h-screen w-full bg-black">
+      <div className="relative flex-grow w-full bg-black">
         {searchEnabled ? (
           <Search />
         ) : (
@@ -28,7 +35,8 @@ const Browse = () => {
           </>
         )}
       </div>
-    </>
+      {viewModal && <InfoModal />}
+    </div>
   );
 };
 

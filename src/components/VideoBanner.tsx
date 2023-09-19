@@ -1,9 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { Movie } from "../utils/types";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import { ModalContext } from "../utils/context";
 
 const VideoBanner: React.FunctionComponent = (): JSX.Element | null => {
   const navigate = useNavigate();
@@ -35,13 +36,10 @@ const VideoBanner: React.FunctionComponent = (): JSX.Element | null => {
           allowFullScreen
         ></iframe>
       </div>
-      <div
-        id="hide-yt-controls"
-        className="w-full h-screen absolute top-0"
-      ></div>
+      <div id="hide-yt-controls" className="w-full h-full absolute top-0"></div>
       <div
         id="text-bg-gradient"
-        className="w-2/3 h-screen bg-gradient-to-r from-black to-transparent absolute top-0"
+        className="w-2/3 h-full bg-gradient-to-r from-black to-transparent absolute top-0"
       ></div>
       <div className="absolute top-[25vh] px-20">
         <img className="max-h-56 w-auto" src={data.logoUrl} />

@@ -1,12 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import React from "react";
+import React, { useContext } from "react";
 import { GalleryType } from "../utils/types";
 import Gallery from "./Gallery";
 import Footer from "./Footer";
 import { useEffect } from "react";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import { ModalContext } from "../utils/context";
 
 const GalleryContainer: React.FunctionComponent = (): JSX.Element => {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ const GalleryContainer: React.FunctionComponent = (): JSX.Element => {
   if (isError) return <></>;
 
   return (
-    <div id="gallery-container" className="absolute top-[75vh] z-10">
+    <div className="absolute top-[75vh] z-10">
       {data &&
         data.map((section: GalleryType, index) => (
           <Gallery

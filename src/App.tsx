@@ -6,15 +6,24 @@ import {
 } from "react-router-dom";
 import Browse from "./pages/Browse";
 import Auth from "./pages/Auth";
-import { SearchContext } from "./utils/context";
+import { ModalContext, SearchContext } from "./utils/context";
+import { Movie } from "./utils/types";
 
 const App: React.FunctionComponent = (): JSX.Element => {
   const [searchEnabled, setSearchEnabled] = useState<boolean>(false);
+  const [modalMovie, setModalMovie] = useState<Movie | null>(null);
+  const [viewModal, setViewModal] = useState<boolean>(false);
+
+  const toggleViewModal = () => {
+    setTimeout(() => {
+      setViewModal(!viewModal);
+    }, 100);
+  };
 
   const toggleSearchEnabled = () => {
     setTimeout(() => {
       setSearchEnabled(!searchEnabled);
-    }, 500);
+    }, 100);
   };
 
   const routes: RouteObject[] = [
@@ -26,7 +35,16 @@ const App: React.FunctionComponent = (): JSX.Element => {
       path: "/browse",
       element: (
         <SearchContext.Provider value={{ searchEnabled, toggleSearchEnabled }}>
-          <Browse />
+          <ModalContext.Provider
+            value={{
+              movie: modalMovie,
+              viewModal,
+              toggleViewModal,
+              setModalMovie,
+            }}
+          >
+            <Browse />
+          </ModalContext.Provider>
         </SearchContext.Provider>
       ),
     },
