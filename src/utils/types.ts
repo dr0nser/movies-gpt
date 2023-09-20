@@ -34,3 +34,14 @@ export interface ModalContextType {
   toggleViewModal: () => void;
   setModalMovie: (movie: Movie | null) => void;
 }
+
+export interface ErrorType {
+  data: string;
+  error: {
+    message: string;
+    stack: string;
+  };
+  internal: boolean;
+  status: number;
+  statusText: string;
+}

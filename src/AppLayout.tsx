@@ -10,6 +10,7 @@ import ShimmerVideoBanner from "./shimmer/ShimmerVideoBanner";
 import Header from "./components/Header";
 import InfoModal from "./components/InfoModal";
 import { ModalContext } from "./utils/context";
+import ErrorPage from "./pages/ErrorPage";
 
 const Browse = React.lazy(() => import("./pages/Browse"));
 const Search = React.lazy(() => import("./pages/Search"));
@@ -21,6 +22,7 @@ const AppLayout: React.FunctionComponent = (): JSX.Element => {
     {
       path: "/",
       element: <Auth />,
+      errorElement: <ErrorPage />,
     },
     {
       path: "/browse",
@@ -53,6 +55,7 @@ const AppLayout: React.FunctionComponent = (): JSX.Element => {
           ),
         },
       ],
+      errorElement: <ErrorPage />,
     },
   ];
 
