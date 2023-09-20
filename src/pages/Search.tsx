@@ -1,28 +1,36 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { LOGIN_BACKGROUND } from "../utils/constants";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import axios from "axios";
 import { auth } from "../utils/firebase";
 import { Movie } from "../utils/types";
-import Header from "../components/Header";
 import SearchResult from "../components/SearchResult";
+import { UseMutationResult, useMutation } from "@tanstack/react-query";
+import ShimmerSearchResult from "../shimmer/ShimmerSearchResult";
+import { ModalContext } from "../utils/context";
+import InfoModal from "../components/InfoModal";
+
+const fetchData = async (query: string): Promise<Movie[]> => {
+  const response = await axios.get<Movie[]>(
+    `http://localhost:8080/api/chat?userId=${auth.currentUser?.uid}&query=${query}`
+  );
+  return response.data as Movie[];
+};
 
 const Search: React.FunctionComponent = (): JSX.Element => {
+  const mutation: UseMutationResult<Movie[], unknown, string, unknown> =
+    useMutation(fetchData);
   const [searchPrompt, setSearchPrompt] = useState("");
-  const [searchResult, setSearchResult] = useState<Movie[] | null>(null);
+  const { viewModal } = useContext(ModalContext);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (searchPrompt.length === 0) return;
-    const response = await axios.get(
-      `http://localhost:8080/api/chat?userId=${auth.currentUser?.uid}&query=${searchPrompt}`
-    );
-    setSearchResult(response.data);
+    mutation.mutate(searchPrompt);
   };
 
   return (
     <div className="flex flex-col h-screen w-full">
-      <Header />
       <div
         className="w-full flex-grow relative bg-cover"
         style={{ backgroundImage: `url(${LOGIN_BACKGROUND})` }}
@@ -42,17 +50,19 @@ const Search: React.FunctionComponent = (): JSX.Element => {
                   value={searchPrompt}
                   onChange={(e) => setSearchPrompt(e.target.value)}
                 />
-                <button className="text-red-600 text-2xl">
+                <button type="submit" className="text-red-600 text-2xl">
                   <FaMagnifyingGlass />
                 </button>
               </form>
             </div>
           </div>
         </div>
-        {searchResult && searchResult.length > 0 ? (
-          <SearchResult movies={searchResult} />
-        ) : null}
+        {mutation.isLoading && <ShimmerSearchResult />}
+        {mutation.isSuccess && mutation.data && (
+          <SearchResult movies={mutation.data} />
+        )}
       </div>
+      {viewModal && <InfoModal />}
     </div>
   );
 };

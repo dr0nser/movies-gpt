@@ -32,7 +32,7 @@ const Gallery: React.FunctionComponent<GalleryProps> = ({
         left: -galleryRef.current.clientWidth,
         behavior: "smooth",
       });
-      checkScroll();
+      setTimeout(checkScroll, 500);
     }
   };
 
@@ -42,7 +42,7 @@ const Gallery: React.FunctionComponent<GalleryProps> = ({
         left: galleryRef.current.clientWidth,
         behavior: "smooth",
       });
-      checkScroll();
+      setTimeout(checkScroll, 500);
     }
   };
 

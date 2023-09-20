@@ -6,6 +6,7 @@ import Footer from "./Footer";
 import { useEffect } from "react";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import ShimmerGallery from "../shimmer/ShimmerGallery";
 
 const GalleryContainer: React.FunctionComponent = (): JSX.Element => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const GalleryContainer: React.FunctionComponent = (): JSX.Element => {
     },
   });
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <ShimmerGallery />;
 
   if (isError) return <></>;
 

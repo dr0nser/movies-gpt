@@ -14,9 +14,9 @@ const Header: React.FunctionComponent = (): JSX.Element => {
   };
 
   return (
-    <header className="z-30 h-16 w-full sticky top-0 left-0 bg-black">
+    <header className="z-20 h-16 w-full sticky top-0 left-0 bg-black">
       <div className="px-12 h-full mx-auto flex justify-between items-center">
-        <Link to={"/"} className="text-4xl font-extrabold text-red-600">
+        <Link to={"/browse"} className="text-4xl font-extrabold text-red-600">
           MoviesGPT
         </Link>
         <div className="flex items-center space-x-2">
@@ -29,7 +29,7 @@ const Header: React.FunctionComponent = (): JSX.Element => {
             </span>
           </div>
           <Link
-            to={"/search"}
+            to={"/browse/search"}
             className="text-gray-200 hover:bg-red-600 hover:text-gray-50 px-4 py-2 font-medium rounded-md flex items-center space-x-1 transition-all duration-150"
           >
             <FaMagnifyingGlass />

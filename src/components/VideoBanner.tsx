@@ -4,6 +4,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import ShimmerVideoBanner from "../shimmer/ShimmerVideoBanner";
 
 const VideoBanner: React.FunctionComponent = (): JSX.Element | null => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const VideoBanner: React.FunctionComponent = (): JSX.Element | null => {
     },
   });
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <ShimmerVideoBanner />;
 
   if (isError) return <></>;
 

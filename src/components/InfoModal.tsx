@@ -3,11 +3,9 @@ import { ModalContext } from "../utils/context";
 import { HiXMark } from "react-icons/hi2";
 
 const InfoModal: React.FunctionComponent = (): JSX.Element => {
-  const { movie, toggleViewModal } = useContext(ModalContext);
+  const { movie, viewModal, toggleViewModal } = useContext(ModalContext);
 
-  console.log(movie);
-
-  return movie ? (
+  return movie && viewModal ? (
     <div className="h-screen w-full backdrop-brightness-50 backdrop-blur-sm absolute top-0 left-0 z-50">
       <div className="mx-auto w-1/2 h-full bg-black relative pt-10 mt-8">
         {movie.trailerUrl !== null ? (
@@ -25,14 +23,20 @@ const InfoModal: React.FunctionComponent = (): JSX.Element => {
         ) : (
           <div className="relative w-full h-1/2">
             <img
-              className="w-full h-full pointer-events-none"
+              className="w-full h-full pointer-events-none object-cover object-center"
               src={movie.backdropUrl}
             />
             <div className="absolute bottom-0 z-50 bg-gradient-to-t from-black to-transparent h-32 w-full"></div>
-            <img
-              src={movie.logoUrl}
-              className="absolute max-h-24 w-auto bottom-10 pl-10 z-50"
-            />
+            {movie.logoUrl ? (
+              <img
+                src={movie.logoUrl}
+                className="absolute max-h-24 w-auto bottom-10 pl-10 z-50"
+              />
+            ) : (
+              <p className="absolute text-7xl font-extrabold text-gray-100 tracking-tight pl-10 bottom-10 z-50">
+                {movie.title}
+              </p>
+            )}
           </div>
         )}
 
@@ -44,11 +48,14 @@ const InfoModal: React.FunctionComponent = (): JSX.Element => {
         </button>
 
         {/* Movie info */}
-        <div className="text-gray-200 px-4">
-          <p className="text-green-500 font-medium">
-            <span>{movie.rating}/10</span> based on {movie.total_ratings}{" "}
-            ratings
-          </p>
+        <div className="text-gray-200 px-12">
+          {movie.total_ratings > 0 && (
+            <p className="text-green-500 font-medium">
+              <span>{movie.rating}/10</span> based on {movie.total_ratings}{" "}
+              ratings
+            </p>
+          )}
+
           <div className="grid grid-cols-3 gap-6 pt-4">
             <div className="col-span-2">
               <p className="text-xl">{movie.overview}</p>

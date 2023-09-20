@@ -2,7 +2,7 @@ import { SearchResultProp } from "../utils/types";
 import Footer from "./Footer";
 import Gallery from "./Gallery";
 
-const SearchResults: React.FunctionComponent<SearchResultProp> = ({
+const SearchResult: React.FunctionComponent<SearchResultProp> = ({
   movies,
 }): JSX.Element => {
   return (
@@ -15,4 +15,4 @@ const SearchResults: React.FunctionComponent<SearchResultProp> = ({
   );
 };
 
-export default SearchResults;
+export default SearchResult;

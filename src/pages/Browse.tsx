@@ -1,32 +1,33 @@
-import { useContext, useEffect } from "react";
-import Header from "../components/Header";
-import VideoBanner from "../components/VideoBanner";
-import GalleryContainer from "../components/GalleryContainer";
+import { useEffect, Suspense } from "react";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
-import InfoModal from "../components/InfoModal";
-import { ModalContext } from "../utils/context";
+import ShimmerVideoBanner from "../shimmer/ShimmerVideoBanner";
+import ShimmerGallery from "../shimmer/ShimmerGallery";
+import React from "react";
+
+const VideoBanner = React.lazy(() => import("../components/VideoBanner"));
+const GalleryContainer = React.lazy(
+  () => import("../components/GalleryContainer")
+);
 
 const Browse = () => {
   const navigate = useNavigate();
-  const { viewModal } = useContext(ModalContext);
 
   useEffect(() => {
     if (!auth.currentUser) navigate("/");
   }, []);
 
   return (
-    <div
-      className={`relative h-screen flex flex-col w-full ${
-        viewModal ? "overflow-hidden" : ""
-      }`}
-    >
-      <Header />
+    <div className="relative h-screen flex flex-col w-full">
       <div className="relative flex-grow w-full bg-black">
-        <VideoBanner />
+        <Suspense fallback={<ShimmerVideoBanner />}>
+          <VideoBanner />
+        </Suspense>
+        <Suspense fallback={<ShimmerGallery />}>
+          <GalleryContainer />
+        </Suspense>
         <GalleryContainer />
       </div>
-      {viewModal && <InfoModal />}
     </div>
   );
 };
