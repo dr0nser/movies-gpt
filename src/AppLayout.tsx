@@ -8,10 +8,10 @@ import {
 import Auth from "./pages/Auth";
 import ShimmerVideoBanner from "./shimmer/ShimmerVideoBanner";
 import Header from "./components/Header";
-import InfoModal from "./components/InfoModal";
 import { ModalContext } from "./utils/context";
 import ErrorPage from "./pages/ErrorPage";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import InfoModal from "./components/InfoModal";
 
 const Browse = React.lazy(() => import("./pages/Browse"));
 const Search = React.lazy(() => import("./pages/Search"));
@@ -36,7 +36,17 @@ const AppLayout: React.FunctionComponent = (): JSX.Element => {
           <Header />
           <Outlet />
           <AnimatePresence mode="wait">
-            <InfoModal />
+            {viewModal && (
+              <motion.div
+                className="absolute z-50 h-screen w-full top-0 left-0"
+                initial={{ opacity: 0, y: "10vh" }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                exit={{ opacity: 0, y: "10vh" }}
+              >
+                <InfoModal />
+              </motion.div>
+            )}
           </AnimatePresence>
         </div>
       ),

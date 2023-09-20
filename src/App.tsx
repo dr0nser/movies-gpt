@@ -9,9 +9,7 @@ const App: React.FunctionComponent = (): JSX.Element => {
   const [viewModal, setViewModal] = useState<boolean>(false);
 
   const toggleViewModal = () => {
-    setTimeout(() => {
-      setViewModal(!viewModal);
-    }, 100);
+    setViewModal((viewModal) => !viewModal);
   };
 
   return (

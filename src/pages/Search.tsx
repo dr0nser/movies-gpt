@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { LOGIN_BACKGROUND } from "../utils/constants";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import axios from "axios";
@@ -7,8 +7,6 @@ import { Movie } from "../utils/types";
 import SearchResult from "../components/SearchResult";
 import { UseMutationResult, useMutation } from "@tanstack/react-query";
 import ShimmerSearchResult from "../shimmer/ShimmerSearchResult";
-import { ModalContext } from "../utils/context";
-import InfoModal from "../components/InfoModal";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
@@ -23,7 +21,6 @@ const Search: React.FunctionComponent = (): JSX.Element => {
   const mutation: UseMutationResult<Movie[], unknown, string, unknown> =
     useMutation(fetchData);
   const [searchPrompt, setSearchPrompt] = useState("");
-  const { viewModal } = useContext(ModalContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -74,7 +71,6 @@ const Search: React.FunctionComponent = (): JSX.Element => {
           <SearchResult movies={mutation.data} />
         )}
       </div>
-      {viewModal && <InfoModal />}
     </motion.div>
   );
 };
