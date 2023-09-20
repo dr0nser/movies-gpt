@@ -1,11 +1,25 @@
-import { Link, useRouteError } from "react-router-dom";
+import { Link, useNavigate, useRouteError } from "react-router-dom";
 import { HiArrowLeft } from "react-icons/hi2";
 import { ErrorType } from "../utils/types";
+import { motion } from "framer-motion";
+import { useEffect } from "react";
+import { auth } from "../utils/firebase";
 
 const ErrorPage = () => {
   const error: ErrorType = useRouteError() as ErrorType;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!auth.currentUser) navigate("/");
+  }, []);
+
   return (
-    <div className="h-screen w-full flex justify-around items-center pb-16 text-gray-100">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      className="h-screen w-full flex justify-around items-center pb-16 text-gray-100"
+    >
       <div className="text-center">
         <p className="text-3xl font-semibold pb-2">Oops!</p>
         <p className="text-xl pb-4">An unexpected error has occurred.</p>
@@ -24,7 +38,7 @@ const ErrorPage = () => {
           </div>
         </Link>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

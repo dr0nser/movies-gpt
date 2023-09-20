@@ -1,11 +1,12 @@
 import { auth } from "../utils/firebase";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { signOut } from "firebase/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { PROFILE_ICON } from "../utils/constants";
 
 const Header: React.FunctionComponent = (): JSX.Element => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSignOut = () => {
     signOut(auth)
@@ -28,14 +29,15 @@ const Header: React.FunctionComponent = (): JSX.Element => {
                 : ""}
             </span>
           </div>
-          <Link
-            to={"/browse/search"}
-            className="text-gray-200 hover:bg-red-600 hover:text-gray-50 px-4 py-2 font-medium rounded-md flex items-center space-x-1 transition-all duration-150"
-          >
-            <FaMagnifyingGlass />
-            <span>Search movies using AI</span>
-          </Link>
-
+          {location.pathname !== "/browse/search" && (
+            <Link
+              to={"/browse/search"}
+              className="text-gray-200 hover:bg-red-600 hover:text-gray-50 px-4 py-2 font-medium rounded-md flex items-center space-x-1 transition-all duration-150"
+            >
+              <FaMagnifyingGlass />
+              <span>Search movies using AI</span>
+            </Link>
+          )}
           <button
             className="text-gray-200 hover:bg-red-600 hover:text-gray-50 px-2 py-2 font-medium rounded-md transition-all duration-150"
             onClick={() => handleSignOut()}

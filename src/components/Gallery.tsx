@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { GalleryProps, Movie } from "../utils/types";
 import Card from "./Card";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
+import { motion } from "framer-motion";
 
 const Gallery: React.FunctionComponent<GalleryProps> = ({
   title,
@@ -53,8 +54,16 @@ const Gallery: React.FunctionComponent<GalleryProps> = ({
       </p>
       <div className="pb-6 relative">
         <div className="flex space-x-8 overflow-hidden" ref={galleryRef}>
-          {cards.map((card: Movie) => (
-            <Card key={card.id} {...card} />
+          {cards.map((card: Movie, index) => (
+            <motion.div
+              key={card.id}
+              className="flex-shrink-0 rounded-lg overflow-hidden"
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: index * 0.1 }}
+            >
+              <Card {...card} />
+            </motion.div>
           ))}
         </div>
         {canScrollLeft && (

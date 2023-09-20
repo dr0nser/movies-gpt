@@ -11,6 +11,7 @@ import Header from "./components/Header";
 import InfoModal from "./components/InfoModal";
 import { ModalContext } from "./utils/context";
 import ErrorPage from "./pages/ErrorPage";
+import { AnimatePresence } from "framer-motion";
 
 const Browse = React.lazy(() => import("./pages/Browse"));
 const Search = React.lazy(() => import("./pages/Search"));
@@ -34,7 +35,9 @@ const AppLayout: React.FunctionComponent = (): JSX.Element => {
         >
           <Header />
           <Outlet />
-          <InfoModal />
+          <AnimatePresence mode="wait">
+            <InfoModal />
+          </AnimatePresence>
         </div>
       ),
       children: [

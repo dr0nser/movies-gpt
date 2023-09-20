@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import Body from "./AppLayout";
+import AppLayout from "./AppLayout";
 import { ModalContext } from "./utils/context";
 import { Movie } from "./utils/types";
+import { AnimatePresence } from "framer-motion";
 
 const App: React.FunctionComponent = (): JSX.Element => {
   const [modalMovie, setModalMovie] = useState<Movie | null>(null);
@@ -14,16 +15,18 @@ const App: React.FunctionComponent = (): JSX.Element => {
   };
 
   return (
-    <ModalContext.Provider
-      value={{
-        movie: modalMovie,
-        viewModal,
-        toggleViewModal,
-        setModalMovie,
-      }}
-    >
-      <Body />
-    </ModalContext.Provider>
+    <AnimatePresence mode="wait">
+      <ModalContext.Provider
+        value={{
+          movie: modalMovie,
+          viewModal,
+          toggleViewModal,
+          setModalMovie,
+        }}
+      >
+        <AppLayout />
+      </ModalContext.Provider>
+    </AnimatePresence>
   );
 };
 

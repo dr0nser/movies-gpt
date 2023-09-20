@@ -1,12 +1,38 @@
 import React, { useContext } from "react";
 import { ModalContext } from "../utils/context";
 import { HiXMark } from "react-icons/hi2";
+import { motion } from "framer-motion";
+
+const modalTransition = {
+  in: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "tween",
+      ease: "anticipate",
+    },
+  },
+  out: {
+    opacity: 0,
+    y: "-100vh",
+    transition: {
+      type: "tween",
+      ease: "anticipate",
+    },
+  },
+};
 
 const InfoModal: React.FunctionComponent = (): JSX.Element => {
   const { movie, viewModal, toggleViewModal } = useContext(ModalContext);
 
   return movie && viewModal ? (
-    <div className="h-screen w-full backdrop-brightness-50 backdrop-blur-sm absolute top-0 left-0 z-50">
+    <motion.div
+      className="h-screen w-full backdrop-brightness-50 backdrop-blur-sm absolute top-0 left-0 z-50"
+      initial="out"
+      animate="in"
+      exit="out"
+      variants={modalTransition}
+    >
       <div className="mx-auto w-1/2 h-full bg-black relative pt-10 mt-8">
         {movie.trailerUrl !== null ? (
           <div className="relative w-full h-1/2">
@@ -77,7 +103,7 @@ const InfoModal: React.FunctionComponent = (): JSX.Element => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   ) : (
     <></>
   );

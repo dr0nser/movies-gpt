@@ -7,6 +7,7 @@ import {
 import { auth, googleAuthProvider } from "../utils/firebase";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Auth: React.FunctionComponent = (): JSX.Element => {
   const navigate = useNavigate();
@@ -38,7 +39,12 @@ const Auth: React.FunctionComponent = (): JSX.Element => {
   };
 
   return (
-    <div className="relative">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      className="relative"
+    >
       <div
         style={{
           backgroundImage: `url(${LOGIN_BACKGROUND})`,
@@ -50,7 +56,12 @@ const Auth: React.FunctionComponent = (): JSX.Element => {
       <div className="h-screen w-full absolute top-0 left-0">
         <div className="flex justify-around items-center pt-64">
           <div className="text-center">
-            <p className="text-gray-100 text-7xl font-extrabold">
+            <motion.div
+              initial={{ opacity: 0, y: "-10vh" }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+              className="text-gray-100 text-7xl font-extrabold"
+            >
               Find the best movies, biggest hits
               <br />
               and more with{" "}
@@ -58,8 +69,13 @@ const Auth: React.FunctionComponent = (): JSX.Element => {
                 MoviesGPT
               </span>
               .
-            </p>
-            <div className="flex justify-around">
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: "-10vh" }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.5 }}
+              className="flex justify-around"
+            >
               <button
                 className="flex items-center space-x-3 bg-red-700 rounded-md px-20 py-3 mt-6"
                 onClick={() => handleGoogleAuth()}
@@ -73,11 +89,11 @@ const Auth: React.FunctionComponent = (): JSX.Element => {
                   Login to continue
                 </p>
               </button>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

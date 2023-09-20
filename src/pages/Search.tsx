@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { LOGIN_BACKGROUND } from "../utils/constants";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import axios from "axios";
@@ -9,6 +9,8 @@ import { UseMutationResult, useMutation } from "@tanstack/react-query";
 import ShimmerSearchResult from "../shimmer/ShimmerSearchResult";
 import { ModalContext } from "../utils/context";
 import InfoModal from "../components/InfoModal";
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const fetchData = async (query: string): Promise<Movie[]> => {
   const response = await axios.get<Movie[]>(
@@ -22,6 +24,11 @@ const Search: React.FunctionComponent = (): JSX.Element => {
     useMutation(fetchData);
   const [searchPrompt, setSearchPrompt] = useState("");
   const { viewModal } = useContext(ModalContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!auth.currentUser) navigate("/");
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -30,7 +37,12 @@ const Search: React.FunctionComponent = (): JSX.Element => {
   };
 
   return (
-    <div className="flex flex-col h-screen w-full">
+    <motion.div
+      initial={{ opacity: 0, y: "-1vh" }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+      className="flex flex-col h-screen w-full"
+    >
       <div
         className="w-full flex-grow relative bg-cover"
         style={{ backgroundImage: `url(${LOGIN_BACKGROUND})` }}
@@ -63,7 +75,7 @@ const Search: React.FunctionComponent = (): JSX.Element => {
         )}
       </div>
       {viewModal && <InfoModal />}
-    </div>
+    </motion.div>
   );
 };
 
