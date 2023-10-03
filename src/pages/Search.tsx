@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 const fetchData = async (query: string): Promise<Movie[]> => {
   const response = await axios.get<Movie[]>(
-    `http://localhost:8080/api/chat?userId=${auth.currentUser?.uid}&query=${query}`
+    `http://localhost:8080/api/search?userId=${auth.currentUser?.uid}&query=${query}`
   );
   return response.data as Movie[];
 };
