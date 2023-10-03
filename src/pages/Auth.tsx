@@ -68,7 +68,6 @@ const Auth: React.FunctionComponent = (): JSX.Element => {
               <span className="animate-text bg-gradient-to-r from-red-600 via-orange-600 to-red-600 bg-clip-text text-transparent">
                 MoviesGPT
               </span>
-              .
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: "-10vh" }}

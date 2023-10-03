@@ -8,10 +8,10 @@ const Footer: React.FunctionComponent = (): JSX.Element => {
         Created by{" "}
         <a
           className="text-decoration-none text-red-600 hover:underline"
-          href="https://github.com/whyucode"
+          href="https://github.com/dr0nser"
           target="_blank"
         >
-          @whyucode
+          @dr0nser
         </a>
       </div>
       <div className="flex items-center space-x-6 text-3xl">
@@ -24,7 +24,7 @@ const Footer: React.FunctionComponent = (): JSX.Element => {
         </a>
         <a
           className="text-gray-50 "
-          href="https://github.com/whyucode"
+          href="https://github.com/dr0nser"
           target="_blank"
         >
           <FaGithub />
