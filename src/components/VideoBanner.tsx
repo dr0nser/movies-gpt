@@ -20,7 +20,9 @@ const VideoBanner: React.FunctionComponent = (): JSX.Element | null => {
     queryKey: ["banner"],
     queryFn: async () => {
       if (!auth.currentUser) return null;
-      const queryURL = `http://localhost:8080/api/banner?userId=${auth.currentUser?.uid}`;
+      const queryURL = `${import.meta.env.VITE_API_DOMAIN}api/banner?userId=${
+        auth.currentUser?.uid
+      }`;
       const response = await axios.get(queryURL);
       return response.data as Movie;
     },

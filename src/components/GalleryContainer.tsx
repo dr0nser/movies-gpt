@@ -19,7 +19,9 @@ const GalleryContainer: React.FunctionComponent = (): JSX.Element => {
     queryKey: ["gallery"],
     queryFn: async () => {
       if (!auth.currentUser) return null;
-      const queryURL = `http://localhost:8080/api/gallery?userId=${auth.currentUser?.uid}`;
+      const queryURL = `${import.meta.env.VITE_API_DOMAIN}api/gallery?userId=${
+        auth.currentUser?.uid
+      }`;
       const response = await axios.get(queryURL);
       return response.data as GalleryType[];
     },
