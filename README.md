@@ -4,7 +4,17 @@ An **AI** powered movie suggesting and searching platform. MoviesGPT uses GPT 3.
 
 Live Link: [https://movies-gpt-two.vercel.app/](https://movies-gpt-two.vercel.app/)
 
-### Backend
+## Tech Stack
+
+- React
+- Typescript
+- TailwindCSS
+- Firebase
+- React Query
+- Axios
+- Framer Motion
+
+## Backend
 
 MoviesGPT is powered by the [MoviesGPT API](https://github.com/dr0nser/movies-gpt-backend) that performs:
 
@@ -15,17 +25,7 @@ MoviesGPT is powered by the [MoviesGPT API](https://github.com/dr0nser/movies-gp
 
 [View MoviesGPT API](https://github.com/dr0nser/movies-gpt-backend)
 
-### Tech Stack
-
-- React
-- Typescript
-- TailwindCSS
-- Firebase
-- React Query
-- Axios
-- Framer Motion
-
-### Features
+## Features
 
 - Movie suggestions based on the current movie trends organized in different categories: trending, top-rated, and upcoming releases. The recommendations are based on the most recent data from the TMDB API.
 - Immersive movie cards with loading and hover animations displaying movie image. Upon click, it displays the movie details modal displaying complete movie information while playing the trailer.
