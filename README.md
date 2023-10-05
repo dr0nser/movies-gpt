@@ -2,7 +2,11 @@
 
 An **AI** powered movie suggesting and searching platform. MoviesGPT uses GPT 3.5 Turbo engine and TMDB API to provide users with a Netflix like experience.
 
-It is powered by the [MoviesGPT API](https://github.com/dr0nser/movies-gpt-backend) that performs:
+Live Link: [https://movies-gpt-two.vercel.app/](https://movies-gpt-two.vercel.app/)
+
+### Backend
+
+MoviesGPT is powered by the [MoviesGPT API](https://github.com/dr0nser/movies-gpt-backend) that performs:
 
 - server-side authentication for every request
 - fetches data from other sources,
