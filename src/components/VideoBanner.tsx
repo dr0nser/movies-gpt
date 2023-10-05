@@ -51,10 +51,12 @@ const VideoBanner: React.FunctionComponent = (): JSX.Element | null => {
         id="text-bg-gradient"
         className="w-2/3 h-full bg-gradient-to-r from-black to-transparent absolute top-0"
       ></div>
-      <div className="absolute top-[20vh] px-20">
-        <img className="max-h-56 w-auto" src={data.logoUrl} />
+      <div className="absolute bottom-[20vh] px-20">
+        <img className="max-h-48 max-w-16" src={data.logoUrl} />
         <p className="w-1/3 text-2xl tracking-tight text-white py-8 antialiased">
-          {data.overview}
+          {data.overview.length >= 250
+            ? data.overview.substring(0, 250) + "..."
+            : data.overview}
         </p>
         <button
           onClick={() => handleModalView()}
